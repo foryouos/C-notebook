@@ -2,6 +2,7 @@
 ## 目录：
 * Markdown简介
 * Markdown语法
+* Markdown高级技巧
 * Markdown公众号插件
 * 工具Typora使用及破解
 
@@ -13,6 +14,7 @@
  * 纯文本内容，兼容所有文本编译器与字处理软件
  * 随时修改文章排版
  * 可读，直观，学习成本低
+****
  ### Markdown语法
  #### 强调
  Markdown使用星号\* 和下划线 \_ 作为标记强调字词的符号
@@ -25,6 +27,7 @@ _ 强调
 * 强调
 _ 强调
 ```
+***
 #### 斜体
 将内容用\*或\_包裹起来，包围的字词会被转换为表前包围，会显示斜体
 ```Markdown
@@ -38,6 +41,7 @@ _斜体内容_
 * 用什么符号开启标签，就用什么符号结束
 * \*和\_两边都有空白的话，它们就只会被当成普通的符号
 * 如果要在文字前后直接插入普通的星号或下划线，可以用反斜杠\\*\\_
+****
 #### 粗体
 用两个\*或\_包起来的话，则会被转成
 ```Markdown
@@ -46,24 +50,141 @@ __粗体内容__
 ```
 **粗体内容**
 __粗体内容__
-
+****
 #### 删除线
 使用两个\~可以给内容加~~删除线~~
 ```Markdown
 ~~删除的内容~~
 ```
 ~~删除的内容~~
-
+****
 #### 标题
+在首行插入1到6个\#(最多支持6级标题)对应标题1到6
 ```Markdown
+# 标题1
+## 标题2
+#### 标题4
+###### 标题6
+```
+# 标题1
+## 标题2
+#### 标题4
+###### 标题6
 
+****
+#### 文本高亮
 
+```markdown
+`html` `css` `javascript`
+```
+`html` `css` `javascript`
 
-
+#### 注脚
+```Markdown
+注脚百度[^1]
+[^1]:www.baidu.com   //放结尾，可链接可文字
 ```
 
+注脚百度[^1]
 
 
+
+#### Emoji图表
+
+:100: :grinning:
+
+#### 链接
+
+##### 行内形式链接
+行内形式的链接是在方括号后面接括号并插入链接即可，如果想要加上链接的alt体会文字，只要在网址后面，用双引号把alt文字包起来即可，其格式为 \[内容\]\(http_url "alt提示"\)
+```Markdown
+[内容](http_url "alt提示")
+[foryouos](https://foryouos.github.io/ "foryouos页面")
+```
+[foryouos](https://foryouos.github.io/ "foryouos页面")
+
+##### 参考形式链接
+参考形式的链接使用另外一个方括号在连接文字的括号后面，而在第二个方括号里面填入要以辨识链接的标签：\(两个括号之前也可加空白\)
+```Markdown
+[内容][1]瓶子的跋涉[1]:https://foryouos.github.io/ "foryouos页面"
+```
+[foryouos][1] 瓶子的跋涉[1]:<https://foryouos.github.io/> "foryouos页面"
+****
+#### 图片
+
+##### 行内形式图片
+```Markdown
+![Allt text](/path/to/img.jpg "optional title")
+```
+##### 参考形式图片
+```markdown
+![Alt text][id]
+[id]:url/to/image "optional title attribute"
+```
+
+微信卡片阅读方式
+```Markdown
+[![Mark](https://files.mdnice.com/dance.gif)](https://mp.weixin.qq.com/s/lM808MxUu6tp8zU8SBu3sg)
+```
+[![Mark](https://files.mdnice.com/dance.gif)](https://foryouos.github.io/)
+
+****
+#### 列表
+
+##### 无序列表
+无序列表使用\*,\+或是-作为列表标记
+```Markdown
+* 香蕉
+* 苹果
+* 桃子
+```
+* 香蕉
+* 苹果
+* 桃子
+##### 有序列表
+```Markdown
+1.第一天
+2.第二天
+3.第三天
+```
+1.第一天
+2.第二天
+3.第三天
+##### 任务列表
+任务列表的语法格式为 \-\[ \]todo,其中\[ \]\(带空格的中括号\)表示未完成的任务,\[X\]\(带字母x的中括号\)表示已经完成的任务
+列表之前可以相互嵌套
+```Markdown
+- [x] 起床
+- [x] 吃饭
+- [x] 跑步
+- [ ] 工作
+```
+- [x] 起床
+- [x] 吃饭
+- [x] 跑步
+- [ ] 工作
+
+##### 注意：
+Markdown在下面这些符号前加上反斜杠来帮助插入普通的字符
+```Markdown
+	\   反斜杠
+	`   反引号
+	*   星号
+	_   底线
+	{}  大括号
+	[]  方括号
+	()  括号
+	#   井字号
+	+    加号
+	-    减号
+	.   英文句点
+	!   惊叹号
+```
+****
+#### 分隔线
+在一行中用三个或以上的\*,\-,\_来创建一个分隔线，行内不能有其它东西，也可以在型号中间插入空白
+****
+#### 引用
 
 ```markdown
 > 区块引用
@@ -76,3 +197,58 @@ __粗体内容__
 >> 嵌套引用
 >>> 三嵌套引用
 >>>> 四嵌套引用
+***
+#### 表格
+
+* 第一行包含表头并用"竖线"\(|)分隔
+* 第二行将标题与单元格分开，并且必须包含三个或更多破折号
+* 第三行以及随后的任何行均包含单元格值
+##### 注意
+* 不能在Markdown中将单元格分隔成多行，他们必须保持为单行，如果需要，还可以使用HTML \<br>标记对内容进行强制换行
+* 第二行单元长短与标题不需要保持一致，但必须用竖线 \(|)分隔
+* 可以有空白的单元格
+###### 通过冒号指定每一列的文本对齐方式
+* \:--: 两端都有冒号表示内容和标题栏居中对齐
+* \:--- 左侧冒号表示内容和标题栏居左对齐
+* \---: 右侧冒号表示内容和标签栏居右对齐
+```Markdown
+| 表头 | 表头 |
+| ---- | ----|
+|单元格 |单元格|
+|单元格 | 单元格|
+```
+| 表头 | 表头 |
+| ---- | :--:|
+|单元格 |单元格|
+|单元格 | 单元格|
+
+****
+### Markdown高级技巧
+####支持的HTML元素
+不在Markdown覆盖范围之内的标签，都可以直接在文档里面用HTML写
+目前支持的HTML元素
+```HTML
+<kbd>
+<b>
+<i>
+<em>
+<sup>
+<sub>
+<br>
+```
+#### 公式
+Markdown Preview Enhance使用  [Katex](https://github.com/Khan/KaTeX)和[MathJax](https://github.com/mathjax/MathJax)来渲染数学表达式。katex拥有比MathJax更快的性能，但缺少很多MathJax拥有的特性
+
+### Typora
+[Typora Markdown编辑器](https://typoraio.cn/ "Typora Markdown编辑器")
+```tiff
+https://typoraio.cn/
+```
+
+### typora1.4.8激活工具
+[蓝奏云](https://foryouos.lanzoul.com/ic2dX0mc3nbc "typoral激活工具蓝奏云盘")[^2]
+[百度网盘](https://pan.baidu.com/s/1uELB0Y7-I9lD9N8jWmwgRg?pwd=fh9w "typoral激活工具百度网盘")[^3]
+
+[^1]:www.baidu.com
+[^2]:https://foryouos.lanzoul.com/ic2dX0mc3nbc
+[^3]:https://pan.baidu.com/s/1uELB0Y7-I9lD9N8jWmwgRg?pwd=fh9w
