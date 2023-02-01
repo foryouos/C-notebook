@@ -1,4 +1,5 @@
 # Markdown
+
 ## 目录：
 * Markdown简介
 * Markdown语法
@@ -253,15 +254,15 @@ $$
 * 矢量，累加累乘，极限
 * 希腊字母
 
-![上下标](E:\学习笔记\Markdown\markdown_note\assets\上下标-1675241625291-4.png  "上下标正负无穷")
+![上下标](https://mmbiz.qpic.cn/mmbiz_png/ORog4TEnkbtx1lS5fMaqmNwV87NSnmSyFAIicUSDEg8BtRcHvw529VEAicocqicQzHbhE4ias87VjPlxIUa0zTtPDA/0?wx_fmt=png  "上下标正负无穷")
 
-![加减法](E:\学习笔记\Markdown\markdown_note\assets\加减乘-1675241612532-2.png "加减法，分式根号，省略号")
+![加减法](https://mmbiz.qpic.cn/mmbiz_png/ORog4TEnkbtx1lS5fMaqmNwV87NSnmSyeABopNmGheicskwtTEngzFezb4ianVXQOM59liaqUzQvibtJZehNSJMu7w/0?wx_fmt=png "加减法，分式根号，省略号")
 
-![三角函数](E:\学习笔记\Markdown\markdown_note\assets\三角函数-1675241660643-6.png "三角函数")
+![三角函数](https://mmbiz.qpic.cn/mmbiz_png/ORog4TEnkbtx1lS5fMaqmNwV87NSnmSypvDGR56JHomIaahoCyOZJchmQ3TRa9c1J2mc2hMp4Piaia8g1EmpCMBA/0?wx_fmt=png "三角函数")
 
-![矢量](E:\学习笔记\Markdown\markdown_note\assets\矢量-1675241692108-8.png "矢量")
+![矢量](https://mmbiz.qpic.cn/mmbiz_png/ORog4TEnkbtx1lS5fMaqmNwV87NSnmSylLUOKPwpP4SEicY5OciclHZ166qLmVf7Dy5PrxOVicQHBps2sZYPThUtg/0?wx_fmt=png "矢量")
 
-![希腊字母](E:\学习笔记\Markdown\markdown_note\assets\希腊字母.png)
+![希腊字母](https://mmbiz.qpic.cn/mmbiz_png/ORog4TEnkbtx1lS5fMaqmNwV87NSnmSyBW5mZfyfD90IeZFp3IwJbDbFBNbUoMgLgS7X1SpSAT2AxMXQHNibIJQ/0?wx_fmt=png "希腊字母")
 
 
 
@@ -280,7 +281,10 @@ https://typoraio.cn/
 ### typora1.4.8激活工具
 
 [蓝奏云](https://foryouos.lanzoul.com/ic2dX0mc3nbc "typoral激活工具蓝奏云盘")[^2]
+
 [百度网盘](https://pan.baidu.com/s/1uELB0Y7-I9lD9N8jWmwgRg?pwd=fh9w "typoral激活工具百度网盘")[^3]😊
+
+****
 
 [^1]:www.baidu.com
 [^2]:https://foryouos.lanzoul.com/ic2dX0mc3nbc
