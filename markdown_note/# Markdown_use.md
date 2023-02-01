@@ -238,16 +238,49 @@ Markdown在下面这些符号前加上反斜杠来帮助插入普通的字符
 ```
 #### 公式
 Markdown Preview Enhance使用  [Katex](https://github.com/Khan/KaTeX)和[MathJax](https://github.com/mathjax/MathJax)来渲染数学表达式。katex拥有比MathJax更快的性能，但缺少很多MathJax拥有的特性
+```Markdown
+$$
+h_\theta(x)=\theta_0+\theta_1x
+$$
+```
+$$
+h_\theta(x)=\theta_0+\theta_1x
+$$
+##### 常见符号的代码
+* 上下标，正负无穷
+* 加减法，分式，根号，省略号
+* 三角函数
+* 矢量，累加累乘，极限
+* 希腊字母
+
+![上下标](E:\学习笔记\Markdown\markdown_note\assets\上下标-1675241625291-4.png  "上下标正负无穷")
+
+![加减法](E:\学习笔记\Markdown\markdown_note\assets\加减乘-1675241612532-2.png "加减法，分式根号，省略号")
+
+![三角函数](E:\学习笔记\Markdown\markdown_note\assets\三角函数-1675241660643-6.png "三角函数")
+
+![矢量](E:\学习笔记\Markdown\markdown_note\assets\矢量-1675241692108-8.png "矢量")
+
+![希腊字母](E:\学习笔记\Markdown\markdown_note\assets\希腊字母.png)
+
+
+
+
+
+
 
 ### Typora
+
 [Typora Markdown编辑器](https://typoraio.cn/ "Typora Markdown编辑器")
+
 ```tiff
 https://typoraio.cn/
 ```
 
 ### typora1.4.8激活工具
+
 [蓝奏云](https://foryouos.lanzoul.com/ic2dX0mc3nbc "typoral激活工具蓝奏云盘")[^2]
-[百度网盘](https://pan.baidu.com/s/1uELB0Y7-I9lD9N8jWmwgRg?pwd=fh9w "typoral激活工具百度网盘")[^3]
+[百度网盘](https://pan.baidu.com/s/1uELB0Y7-I9lD9N8jWmwgRg?pwd=fh9w "typoral激活工具百度网盘")[^3]😊
 
 [^1]:www.baidu.com
 [^2]:https://foryouos.lanzoul.com/ic2dX0mc3nbc
