@@ -451,6 +451,16 @@ $$
 * 无空格 小空格\\,中空格\\;打空格\\
 * 真空格\\quad 双真空格\\qquad 
 ****
+
+
+<![蓝1](https://files.mdnice.com/blue.jpg),![绿2](https://files.mdnice.com/green.jpg),![红3](https://files.mdnice.com/red.jpg)>
+
+
+
+
+
+
+
 ### Typora
 
 [Typora Markdown编辑器](https://typoraio.cn/ "Typora Markdown编辑器")
