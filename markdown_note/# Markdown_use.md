@@ -68,6 +68,7 @@ __粗体内容__
 ###### 标题6
 ```
 # 标题1
+
 ## 标题2
 #### 标题4
 ###### 标题6
@@ -80,6 +81,14 @@ __粗体内容__
 ```
 `html` `css` `javascript`
 
+#### 带下划线
+
+```markdown
+<u>带下划线文本</u>
+```
+
+<u>带下划线文本</u>
+
 #### 注脚
 ```Markdown
 注脚百度[^1]
@@ -88,8 +97,7 @@ __粗体内容__
 
 注脚百度[^1]
 
-
-
+****
 #### Emoji图表
 
 :100: :grinning:
@@ -263,13 +271,186 @@ $$
 ![矢量](https://mmbiz.qpic.cn/mmbiz_png/ORog4TEnkbtx1lS5fMaqmNwV87NSnmSylLUOKPwpP4SEicY5OciclHZ166qLmVf7Dy5PrxOVicQHBps2sZYPThUtg/0?wx_fmt=png "矢量")
 
 ![希腊字母](https://mmbiz.qpic.cn/mmbiz_png/ORog4TEnkbtx1lS5fMaqmNwV87NSnmSyBW5mZfyfD90IeZFp3IwJbDbFBNbUoMgLgS7X1SpSAT2AxMXQHNibIJQ/0?wx_fmt=png "希腊字母")
+****
+#### 矩阵
+##### 简单矩阵
+使用\\begin\{matrix}...\\end\{matrix}生成,每一行以\\\结尾表示换行，元素间以&间隔，式子的表示序号\\tag\{1}\(右边的序号)
+- matrix 矩阵
+- Bmatrix 大括号
+- bmatrix 中括号
+- vmatrix 行列式
+- 
+```markdown
+$$
+\begin{matrix}
+1 & 2 & 3 \\
+4 & 5 & 6 \\
+7 & 8 & 9 
+\end{matrix} \tag{1}
+$$
+```
+$$
+\begin{matrix}
+1 & 2 & 3 \\
+4 & 5 & 6 \\
+7 & 8 & 9 
+\end{matrix} \tag{1}
+$$
+##### 带左右括号的矩阵(大众小括号)
+在\\begin{}之前和\end{}之后添加左右括号代码
+****
+```markdown
+$$
+\left\{
+\begin{matrix}
+1 & 2 & 3 \\
+4 & 5 & 6 \\
+7 & 8 & 9 
+\end{matrix}
+\right\} \tag{1}
+$$
+```
+$$
+\left\{
+\begin{matrix}
+1 & 2 & 3 \\
+4 & 5 & 6 \\
+7 & 8 & 9 
+\end{matrix}
+\right\} \tag{1}
+$$
+****
+改变\\begin\{matrix}和\end\{maatrix}中的matrix
+```markdown
+$$
+\begin{bmatrix}
+1 & 2 & 3 \\
+4 & 5 & 6 \\
+7 & 8 & 9 
+\end{bmatrix} \tag{1}
+$$
+```
+$$
+\begin{bmatrix}
+1 & 2 & 3 \\
+4 & 5 & 6 \\
+7 & 8 & 9 
+\end{bmatrix} \tag{1}
+$$
+****
+##### 包含希腊字母与省略号
+
+行省略号\\cdots,列省略号\vdots,斜向省略号(左上至右下)\\ddots
+```Markdown
+$$
+\begin{Bmatrix}
+1         & 2          &\cdots        & 5 \\
+6         & 7          & \vdots       & 10 \\
+\vdots    &\vdots      & \ddots       & \vdots \\
+\alpha    & \alpha+1   & \cdots       & \alpha+4 
+\end{Bmatrix}
+$$
+```
+$$
+\begin{Bmatrix}
+1         & 2          &\cdots        & 5 \\
+6         & 7          & \vdots       & 10 \\
+\vdots    &\vdots      & \ddots       & \vdots \\
+\alpha    & \alpha+1   & \cdots       & \alpha+4 
+\end{Bmatrix}
+$$
+
+****
+#### 表格
+```markdown
+$$
+\begin{array}{|c|c|c|}
+            \hline 2&9&4\\
+            \hline 7&5&3\\
+            \hline 6&1&8\\
+            \hline
+\end{array}
+$$
+```
+$$
+\begin{array}{|c|c|c|}
+            \hline 2&9&4\\
+            \hline 7&5&3\\
+            \hline 6&1&8\\
+            \hline
+\end{array}
+$$
+##### 注意
+* 开头结尾：\\begin{array},\\end{array}
+* 定义式：例{|c|c|c|},其中c l r分别代表居中，左对齐，右对齐
+* 分隔线：
+	- 竖直分割线：在定义式中插入 \|,\(\||代表两条竖直分割线)
+	- 水平分隔线：在下一行输入前插入\\hline，
+	- 其它：每行元素均要插入 \&,每行元素以\\\结尾
+****
+#### 真值表
+```Markdown 
+$$
+\begin{aligned}
+a &= b + c \\
+  &= d + e + f
+\end{aligned}
+$$
+```
+$$
+\begin{aligned}
+a &= b + c \\
+  &= d + e + f
+\end{aligned}
+$$
+
+#### 多行等式对齐
+
+```Markdown
+$$
+\begin{cases}
+3x + 5y +  z \\
+7x - 2y + 4z \\
+-6x + 3y + 2z
+\end{cases}
+$$
+
+```
+$$
+\begin{cases}
+3x + 5y +  z \\
+7x - 2y + 4z \\
+-6x + 3y + 2z
+\end{cases}
+$$
 
 
 
+#### 方程组，条件表达式
+
+```Markdown
+$$
+f(n)=
+\begin{cases}
+n/2, & \text{if }n\text{ is even}\\
+3n+1, & \text{if }n\text{ is odd}
+\end{cases}
+$$
+```
+$$
+f(n)=
+\begin{cases}
+n/2, & \text{if }n\text{ is even}\\
+3n+1, & \text{if }n\text{ is odd}
+\end{cases}
+$$
 
 
-
-
+#### 间隔
+* 紧贴 \\!
+* 无空格 小空格\\,中空格\\;打空格\\
+* 真空格\\quad 双真空格\\qquad 
+****
 ### Typora
 
 [Typora Markdown编辑器](https://typoraio.cn/ "Typora Markdown编辑器")
@@ -289,3 +470,13 @@ https://typoraio.cn/
 [^1]:www.baidu.com
 [^2]:https://foryouos.lanzoul.com/ic2dX0mc3nbc
 [^3]:https://pan.baidu.com/s/1uELB0Y7-I9lD9N8jWmwgRg?pwd=fh9w
+
+****
+
+参考资料：
+
+* [Typora](https://zhuanlan.zhihu.com/p/261750408 "typora")
+
+* [技能树](https://edu.csdn.net/skill/markdown)
+* [NoteZ个人博客](http://chart.zhenglinglu.cn/pages/3ae8de/)
+
