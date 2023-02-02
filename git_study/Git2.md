@@ -135,6 +135,7 @@ git push <remote> --delete <tagname>
 ```
 ****
 #### 修改分支名
+
 首先保证本地代码是最新的
 ```sh
 git branch -m oldbranchName newbranchname #修改本地分支名
@@ -155,6 +156,8 @@ git push --set-uostream origin newbranchname
 ```sh
 git mv [file-original] [file-renamed]
 ```
+
+****
 
 ### 参考资料
 
