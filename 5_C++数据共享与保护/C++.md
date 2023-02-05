@@ -291,17 +291,58 @@ int main(void)
 	return 0; 
 }
 ```
-
-
-
+#### 常数据成员
 ```C++
-A const a(3,4);  //a是常对象，不能被更新
+#include <iostream>
+using namespace std;
+class A
+{
+public:
+	A(int i);
+	void print();
+private:
+	const int a;  //在任何地方都不能赋值运算
+	static const int b;//静态常数据成员
+};
+//A::A(int i){a=1}  //不能进行赋值，只能写入初始化列表里面
+A::A(int i) :a(i)  //写入初始化列表
+{
 
-
+}
 ```
-
-
-
-
 ****
-
+#### 常引用
+* 如果咋声明引用时用const修饰，被声明的引用就是常引用
+* 常引用所引用的对象不能被更新
+* 如果用常引用做形参，便不会意外地发生对实参的更改。常引用的声明形式
+```C++
+const 类型说明符 &引用名;
+```
+```C++
+#include <iostream>
+using namespace std;
+class Point
+{
+public:
+	Point(int x = 0, int y = 0) :x(x), y(y)
+	{
+	}
+	int getX()
+	{
+		return x;
+	}
+	int getY()
+	{
+		return y;
+	}
+	friend float dist(const Point& a,const Point& b); //友元函数，只要在类体中就行
+private: //私有函数成员
+	int x, y;
+};
+float dist(const Point& a,const Point& b)
+{
+	double x = a.x - b.x;
+	double y = a.y - b.y;
+	return static_cast<float>(sqrt(x * x + y * y));
+}
+```
