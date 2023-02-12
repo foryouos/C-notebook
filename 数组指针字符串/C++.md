@@ -559,30 +559,143 @@ int main(void)
 	* 封装成类后更加简洁，便于管理
 * 可以在访问数组元素前检查下标是否越界
 	* 用assert来检查，assert只在调试时生效
+```C++
+#include <iostream>
+#include <cassert>
+using namespace std;
+class Point
+{
+public:
+	Point(int x, int y)
+	{
+		cout << "Destructor called." << endl;
+	};
+	Point() :x(x), y(y)
+	{
+		cout << "Default Destructor called." << endl;
+	};
+	~Point()
+	{
+		cout << "Destructor called" << endl;
+	}
+	int getX() const { return x; } //常函数
+	int getY() const { return y; }
+	void move(int newX, int newY)
+	{
+		x = newX;
+		y = newY;
+	}
+private:
+	int x, y;
+};
+class ArrayOfPoints  //创建动态数组类
+{
+public:
+	ArrayOfPoints(int size) :size(size)
+	{
+		points = new Point[size];//建立数组，就要想起在何处释放
+	}
+	~ArrayOfPoints()
+	{
+		cout << "Deleting ..." << endl;  //释放数组 
+		delete[] points;
+	}
+	Point& element(int index) //返回引用
+	{
+		assert(index >= 0 && index < size);
+		return points[index];  //返回
+	}
+private:
+	Point* points;//指向动态数组首地址
+	int size; //数组大小
+};
 
 
+int main(void)
+{
+	int count;
+	cout << "Please enter the count of points:";
+	cin >> count;
+	ArrayOfPoints points(count); //创建数组对象
+	points.element(0).move(5, 0); //访问数组元素的成员
+	points.element(1).move(15, 20); //访问数组元素的成员
+	return 0;
+}
+/*
+Please enter the count of points:3
+Default Destructor called.
+Default Destructor called.
+Default Destructor called.
+Deleting ...
+Destructor called
+Destructor called
+Destructor called
+*/
+```
+##### 为什么element函数返回对象的引用
 
-![皮卡丘](https://p.ananas.chaoxing.com/star3/origin/13ed5511d475673295812f74c6a833dd.png)
+* 返回\"引用"可以用来操作封装数组对象内部的数据元素，如果返回"值"则只是返回了一个副本，通过副本是无法操作原来数组中的元素的。
 
+#### vector容器
 
+* 封装任何类型的动态数组
+* 数组下标越界检查
 
+##### vector容器定义:
 
+* vector<元素类型>数组对象名(数组长度)
+* vector<int>arr(5)   //建立大小为5的int数组
 
+```C++
+#include <iostream>
+#include <vector>
+using namespace std;
+//计算数组arr中元素的平均值
+double average(const vector<double>& arr)
+{
+	double sum = 0;
+	for (unsigned i = 0; i < arr.size(); i++)
+	{
+		sum += arr[i];
+	}
+	return sum / arr.size();
+}
+int main(void)
+{
+	unsigned n;
+	cout << "n = ";
+	cin >> n;
+	vector<double>arr(n); //创建数组对象
+	cout << "Please input " << n << " real number:" << endl;
+	for (unsigned i = 0; i < n; i++)
+	{
+		cin >> arr[i];
+	}
+	cout << "Average = " << average(arr) << endl;
+	return 0;
+}
+```
 
+#### 基于for循环配合auto举例
+```C++
+/*
+* 基于范围的for循环配合auto举例
+*/
+#include <vector>
+#include <iostream>
+using namespace std;
+int main(void)
+{
+	vector<int>v = { 1,2,3 };
+	/*v.begin(),指向首元素的迭代器，可以认为是指向首元素的“泛型”指针*/
+	for (auto i = v.begin(); i != v.end(); ++i) //auto是i的类型根据后面变
+	{
+		cout << *i << endl;
+	}
+	for (auto e : v)
+	{
+		cout << e << endl;
+	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
+```
