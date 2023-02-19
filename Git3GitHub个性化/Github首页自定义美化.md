@@ -1,4 +1,5 @@
 #### Github首页自定义美化
+
 * 主页名称设置的与自己id名字想通
 ![主页名称设置成自己的名字](http://mmbiz.qpic.cn/mmbiz_png/ORog4TEnkbtLErS9QZU88YJJ9Kg7ZWTpEN9JwicC7EdA3XiaUtKY9CqTEvia0rD48DqTtCnsNBiaX090mwrbsM6NKg/0?wx_fmt=png)
 * 通过README.md就会自动呈现到GitHub主页，使用Markdown语法
