@@ -1,4 +1,4 @@
-# C-notebook
+# C++notebook
 * C++学习Markdown笔记markdown_note
 # 目录
 * C++数据共享与保护
