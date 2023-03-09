@@ -39,24 +39,24 @@
 #### 天气功能
 > 使用[和风天气](https://widget.qweather.com/)插件嵌入web端
 
-![image-20230309180534309](E:\学习笔记\Markdown\C-notebook\我的网站\assets\image-20230309180534309.png)
+![image-20230309180534309](https://i.imgtg.com/2023/03/09/YfrjU.png)
 
 
 #### 网站
 * `foryouos`[博客](https://www.blog.foryouos.cn)
 > 个人博客
 
-![image-20230309180243668](E:\学习笔记\Markdown\C-notebook\我的网站\assets\image-20230309180243668.png)
+![image-20230309180243668](https://i.imgtg.com/2023/03/09/YfZyv.png)
 
 
 * `foryouos`[主页](www.foryouos.cn)
 > 整合网站信息
 
-![image-20230309180201706](E:\学习笔记\Markdown\C-notebook\我的网站\assets\image-20230309180201706.png)
+![image-20230309180201706](https://i.imgtg.com/2023/03/09/Yfvsq.png)
 
 * `foryouos`[导航栏](www.so.foryouos.cn)
 > 作为和室友们的自定义导航栏(其实是被迫的，还好确实有好功能)
 
-![image-20230309175951339](E:\学习笔记\Markdown\C-notebook\我的网站\assets\image-20230309175951339.png)
+![image-20230309175951339](https://i.imgtg.com/2023/03/09/YfKUY.png)
 
 * 详见具体网站[`Github`](https://www.github.com/foryouos)
