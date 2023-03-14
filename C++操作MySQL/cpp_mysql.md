@@ -1,5 +1,7 @@
-# C&C++ MySQL API,连接池,json
+# C MySQL API详解
+
 ## 普通调用
+
 ### 开发环境
 > 需要引用头文件`#include <mysql.h>`
 * 默认已经安装了MySQL环境
@@ -196,14 +198,14 @@ int main(void)
 #### 分解头文件
 ##### 初始化运行环境
 ```cpp
-//该函数将分配初始化，并返回新对象，并通过返回这个对象去连接MySQL服务器
+//该函数将分配初始化，并返回新对象，并通过返回这个对象去连接MySQL服务器，得到一块内存并保存
 MYSQL* mysql_init(MYSQL * mysql);
 //参数NULL
 ```
 ##### 连接数据库
 ```cpp
 MYSQL * mysql_real_connect(
-MYSQL *mysql,   //mysql_init()函数的返回值
+MYSQL *mysql,   //mysql_init()函数的返回值即指向的指针
 const char *host, //主机地址ip地址，localhost,NULL代表本地连接
 const char *user, //服务器用户名
 const char *passwd,//连接服务器密码
@@ -214,6 +216,7 @@ unsigned long clientflag //通常指定为0
 );
 ```
 ##### 执行SQL语句
+
 ```cpp
 int mysql_query(MYSQL *mysql,const char *query);
 ```
@@ -313,6 +316,7 @@ void mysql_close(MYSQL *mysql);
 ```
 ##### 字符编码
 ###### 返回当前编码
+
 ```C
 // 获取API默认使用的字符编码(当前连接返回默认的字符集)
 const char * mysql_character_set_name(MYSQL *mysql);
@@ -325,7 +329,7 @@ int mysql_set_character_set(MYSQL *mysql,char *csname);
 参数:
 * csname为要设置的字符集:常用`utf8`
 ##### 事务
-> MySql会默认进行事务提交
+> MySql会默认进行事务提交，需要设置逻辑处理时，多吃写操作，开始时创建事务，结束时判断是否全部成功，再提交或处理错误
 ```C
 my_bool mysql_autocommit(MYSQL *mysql,my_bool mode);
 ```
@@ -340,13 +344,18 @@ my_bool mysql_commit(MYSQL *mysql);
 * 成功：0
 * 失败: 非0
 ###### 数据回滚
+
+> 回滚到事务处理前的状态
+
 ```c
 my_bool mysql_rollback(MYSQL *mysql);
 ```
 返回值:
 * 成功： 0
 * 失败： 非0
+
 ##### 打印错误信息
+
 ```c
 //返回错误的描述
 const char *mysql_error(MYSQL *mysql);
