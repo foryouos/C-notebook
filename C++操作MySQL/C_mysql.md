@@ -197,6 +197,7 @@ int main(void)
 ```
 #### 分解头文件
 ##### 初始化运行环境
+
 ```cpp
 //该函数将分配初始化，并返回新对象，并通过返回这个对象去连接MySQL服务器，得到一块内存并保存
 MYSQL* mysql_init(MYSQL * mysql);
@@ -362,3 +363,6 @@ const char *mysql_error(MYSQL *mysql);
 // 返回错误的编码
 unsigned int mysql_error(MYSQL *mysql);
 ```
+##### 参数传递依赖关系
+
+![参数传递依赖关系](https://mmbiz.qpic.cn/mmbiz_png/ORog4TEnkbv2VGCVVXKvuxwgrnANSZyHjoT3kqibCiaBUFvgYlafwib3rwehfMfxERhaoiactnRV00HsaBlX1czaOw/0?wx_fmt=png "参数传递依赖关系")
