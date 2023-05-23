@@ -35,9 +35,9 @@ int open(const char* pathname,int flags,mode_t mode);
     * 检测到文件`不`存在，创建新文件
     * 检测到文件已经存在，创建失败，函数直接返回 - 1（如果不添加这个属性，不会返回 - 1）
 > `mode`：在创建新文件需要`指定新文件`的权限
-	
-	* 参数最大值`0777`
 
+	* 参数最大值`0777`
+	
 	* 返回值
 	* 成功:返回内核分配的文件描述符，大于0的整数
 	* 失败:-1
@@ -440,8 +440,8 @@ int main(int argc, char* argv[]) //在./a.out 传入参数目录，绝对路径
 }
 ```
 
-
 ### 遍历多层目录
+
 ```cpp
 #include <stdio.h>
 #include <stdlib.h>
