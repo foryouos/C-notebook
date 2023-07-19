@@ -1,4 +1,5 @@
 # 面向对象三大特征
+
 >* `封装`是指将数据和行为组合成一个整体，对外部`隐藏`内部的`实现细节，`只提供必要的`接口`。封装可以`保护`数据的`安全性`，`降低`代码的`复杂度`，`提高`代码的`可维护性`。C++通过`private,protected，public`关键字来`控制`成员变量和成员函数的`访问权限`
 >* `继承`是指`子类可以继承父类`的属性和方法，并且可以`添加或修`改自己特有的属性和方法。`继承`可以提高`代码的复用性`；`提高`代码的`扩展性`；同时也是`多态的前提`
 >* `多态`是指`不同类型的对象`对`同一消息`可以做出`不同的响应`。多态可以分为`编译时`和`运行时`多态。`编译`时多态是指通过`重载实现`的多态，即在同一类中定义了相同名称但不同参数的方法，根据调用时传递的参数不同而执行不同方法，`运行时多态`是指通过`重写实现的多态`，即在`子类中重新定义父类中已有的方法`，根据调用时`使用的对象不同`而`执行不同的方法`。多态可以实现`接口的同一`，增加`程序`的`灵活性`和可`扩展性`。
@@ -26,7 +27,7 @@
 * `map` ： 关联容器。保存键值对 
 * `set` ：关键字取值，即只`保存关键字`的容器,--`底层红黑树`
 * `multimap` : 关键字`可`重复的map
-* `multiset` ：关键字`可`重复出现的set
+* `multiset` ：关键字`可`重复出现的set (上四个皆红黑树)
 * `unordered_map` : 用`hash函数`组织的`map`
 * `unordered_set` : 用`hash函数`组织的`set`
 * `unordered_multimap` : 用`hash函数`组织的`map`，关键字`可重`复出现
@@ -42,7 +43,7 @@
 > * 将`旧内存空间`中的`数据`，按`原有顺序`移动到`新的内存空间`
 > * 最后将`旧的内存空间释放`，`vector`扩容`非常耗时`，为了降低再次分配内存空间时的成本，每次`扩容时vector`都会申请比用户`需求量更多`的内存空间(这也就是vector容量的由来，即`capacity>=size`)，以便后期使用
 >
-> 不同的编译器在扩容时所采用的扩容因子可能不同，比如`MSVC`的`扩容因子`为`1.5`，即`每次扩容`时容量变为`原来的1.5倍`。
+> `不`同的`编译器`在扩容时所采用的`扩容因子`可能不同，比如`MSVC`的`扩容因子`为`1.5`，即`每次扩容`时容量变为`原来的1.5倍`。
 
 # `unordered_map`实现原理
 
@@ -50,7 +51,7 @@
 >
 > `unordered_map` 的实现原理是基于`hash表`，通过把`关键码`映射到hash表中的一个位置来访问记录
 >
-> unordered_map 中的元素没有按照他们的键值或映射值的任何顺序排序，而是根据他们的`散列`值`组织成桶`允许它们的键值直接`快速访问`单个元素(通常平常平局时间复杂度)
+> unordered_map 中的元素没有按照他们的键值或映射值的任何顺序排序，而是根据他们的`散列`值`组织成桶`允许它们的键值直接`快速访问`单个元素(通常平常平均时间复杂度)
 >
 > 当两个元素具有相同的`散列值`时，会发生`hash冲突`，为了解决这个问题，unordered_map采用了`链地址法`，即每个桶中存储一个链表，链表中存放所有散列值相同的元素。
 
@@ -70,7 +71,7 @@
 
 > map基于红黑树实现，该结构具有中排序功能，因此map内部的所有元素都是有序的，红黑树的每一个节点都代表着map的一个元素。因此，对于map进行的查找，删除，添加等一系列的操作都相当于是对红黑树进行这样的操作，红黑树的效率决定了map的效率，其增删改查时间复杂度O(log n)
 >
-> 而unordered_map内部实现了一个hash表，因此其元素的排列顺序是杂乱的，无序的。且增删改查时间复杂度为`O(1)`
+> 而unordered_map内部实现了一个`hash表`，因此其元素的排列顺序是`杂乱的`，`无序的`。且增删改查时间复杂度为`O(1)`
 
 
 
@@ -139,7 +140,7 @@ int col = a[0].size(); //列数
 
 # 深拷贝和浅拷贝
 
-> * 浅拷贝就是将源对象的值拷贝给当前对象，两者指向的还是同一地址，对一个对象的修改可能会影响到另一个对象。
+> * 浅拷贝就是将`源对象`的值`拷贝`给当前对象，两者指向的还是`同一地址`，对`一个`对象的`修改`可能会`影响`到`另一个`对象。
 
 ```cpp
 class MyArray {
@@ -149,39 +150,33 @@ public:
         this->size = size;
         data = new int[size];
     }
- 
     // 拷贝构造函数，实现浅拷贝
     MyArray(const MyArray& other) {
         size = other.size;
         data = other.data; // 浅拷贝，将指针复制给新对象
     }
- 
 private:
     int size;
     int* data;
 };
 ```
 
-> * 深拷贝是 一种对象拷贝，它会创建一个新的对象，并将原始对象中的所有数据成员复制到新的对象中，包括多态分配内存。原始对象和新的对象是完全独立的，对一个对象的修改不会影响另一个对象。
+> * 深拷贝是 一种`对象拷贝`，它会创建一个`新的对象`，并将原始对象中的`所有数据成员`复制到`新的对象`中，包括`多态分配内存`。原始对象和新的对象是`完全独立`的，对一个对象的修改`不会影`响另一个对象。
 
 ```cpp
 #include <iostream>
 #include <cstring>
 #pragma warning(disable : 4996)
 using namespace std;
-
 class Person {
-
     public:
         char* name; // 姓名
         int age;    // 年龄
-
         Person(const char* name, int age) {
             this->name = new char[strlen(name) + 1];
             strcpy(this->name, name);
             this->age = age;
         }
-
         // write your code here......
         Person(const Person& p)//拷贝构造函数
         {
@@ -189,7 +184,6 @@ class Person {
             strcpy(this->name, p.name);
             this->age = p.age;
         }
-        
         void showPerson() {
             cout << name << " " << age << endl;
         }
@@ -199,7 +193,6 @@ class Person {
                 name = nullptr;
             }
         }
-
 };
 
 int main() {
@@ -221,9 +214,9 @@ int main() {
 
 >区别：
 >
->* 对象中含有指针类型的成员变量时需要用深拷贝构造，否则用浅拷贝构造
->* 编译器默认的拷贝构造函数是浅拷贝构造函数
->* 如果对象中含有指针用了浅拷贝构造，那么会导致两个指针变量指向同一块地址空间，如果没有创建内存的操作就是浅拷贝，否则就是深拷贝
+>* 对象中含有`指针类型`的成员变量时需要用`深拷贝构造`，`否`则用`浅拷贝构造`
+>* 编译器`默`认的拷贝构造函数是`浅拷贝`构造函数
+>* 如果对象中`含有指针`用了浅拷贝构造，那么会导致两`个指针变量`指向`同一块地址`空间，如果`没有创建内存`的操作就是`浅拷贝`，否则就是深拷贝
 >* 深拷贝可以用于创建独立的副本，对于需要完全独立的对象的情况，必须在修改副本时不影响原始对象的状态。而浅拷贝通常用于创建共享对象，当需要多个共享相同的数据时，可以使用浅拷贝来减少内存占用和提高性能。
 
 # 友元函数
@@ -232,16 +225,13 @@ int main() {
 
 ```cpp
 friend <类型> <友元函数名>(<参数表>);
-
 #include <iostream>
- 
-using namespace std;
- 
+using namespace std; 
 class A
 {
 public:
     A(int _a):a(_a){};
-    friend int geta(A &ca);  ///< 友元函数
+    friend int geta(A &ca);  //  < 友元函数
 private:
     int a;
 };
@@ -295,6 +285,309 @@ int main()
     B b;
     cout<<b.getb(a)<<endl;
     return 0;
+}
+```
+
+# 数组系列
+
+> cbegin在begin迭代器的基础上，添加了const属性，不能用于修改元素。
+
+>* vector动态可变
+>* 可存储任何类型数据
+>* 连续存储空间(扩容和中间插入效率低)
+>* 大小动态改变，会被容器自动处理
+>
+>> array区别：
+>>
+>> * array 固定大小，不能调整大小
+>> * array编译时就已经分配好内存
+>> * array适合存储大小已知并且大小不会改变的数据。
+
+## 插入语法
+
+```cpp
+//1, 在迭代器pos指定的位置之前插入一个新元素elem,并返回新插入元素的迭代器
+iterator insert(pos,elem);
+//2, 在迭代器pos指定的位置之前插入n个元素elem，并返回表示第一个新插入元素位置的迭代器
+iterator insert(pos,n,elem);
+//3, 在迭代器pos指定的位置之前，插入其它容器(不仅限于vector)中位于[first,last]区域的所有元素
+// 并返回表示第一个新插入元素位置的迭代器
+iterator insert(pos,first,last);
+//4, 在迭代器pos指定的位置之前，插入初始化列表(用大括号{}括起来的多个元素，中间有逗号隔开)中所有的元素，
+// 并返回表示第一个新插入元素的迭代器
+iterator insert(pos,initilist);
+```
+
+## emplace_back和push_back区别
+
+* `push_back()` 向容器尾部添加元素时
+  * 创建元素
+  * 拷贝/移动到容器中
+  * 事后销毁第一步创建的元素
+* `emplace_back()`
+  * 直接在容器尾部创建元素
+  * 省去拷贝和移动的过程，在使用中`效率更高`
+
+> * `c.emplace_back(t)` : 在`c`的`尾部`创建一个`值为t`的元素
+> * `c.emplace_front(t)` : 在`t的头部`创建一个值为`t`的元素
+> * `c.emplace(p,t)`  : 在`迭代器p`所指向的`元素之前`创建一个`值为t`的元素，`返回`指定`新添加元素`的`迭代器`。
+
+
+
+## 使用
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <set>
+#include <algorithm>
+using namespace std;
+void print_container(const std::vector<int>& c)
+{
+	for (int i : c)
+		std::cout << i << " ";
+	std::cout << '\n';
+}
+int main(void)
+{
+	//1，创建动态数组
+	vector<int> v;
+	//2，添加元素
+	//v.push_back(1); //在vector容器尾部添加元素
+	v.emplace_back(2); // 在vector容器的尾部添加一个元素 效率更高
+	// 2.1 预留元素空间
+	v.reserve(100); //预留空间
+	
+	// 2.2 插入元素 -返回新插入位置的迭代器
+	// insert(插入位置前面的迭代器;插入值;first,last插入范围，主要指其它容器;ilist，要插入来源的initializer_list
+	//1，
+	v.insert(v.end(), 5);
+	//2,
+	v.insert(v.cbegin(), 9, 5);
+	//3,
+	set<int> s = { 1,2,3,4,5 };
+	v.insert(v.end(), s.begin(), s.end()); //在动态数组末尾，插入s的元素
+	//4,
+	v.insert(v.begin(), { 9,9,9,9 });
+	// 3，删除元素
+	print_container(v);
+	//3.1 删除头节点
+	v.erase(v.begin());
+	//3.2 删除特定区间的节点
+	v.erase(v.begin(), v.begin() + 2);
+	print_container(v);
+	//3.3 删除所有偶数
+	for (vector<int>::iterator it = v.begin(); it != v.end();)
+	{
+		if (*it % 2 == 0)
+		{
+			it = v.erase(it);
+		}
+		else
+		{
+			++it;
+		}
+	}
+	print_container(v);
+	//3.4移除末尾元素
+	v.pop_back();
+
+	// 4,查考容量 遍历查找
+	//  顺序遍历，逆序遍历
+	for (const auto& el : v)
+	{
+		cout << el << " ";
+	}
+	cout << endl;
+
+	// 返回最大值
+	cout << v.size() << endl; //返回容纳的原数数
+	// 返回容纳的元素数
+	cout << v.max_size() << endl; //理论上可容纳的最大值(根据系统)
+	cout << v.capacity() << endl; //返回当前存储空间可容纳的最大值
+
+	// 相关操作
+	// 指定值填充
+	// 能够实现排序  --- 使用算法，左右迭代器实现算法排序
+	sort(v.begin(), v.end());
+	print_container(v);
+
+	// 交换两个元素的所有内容
+	vector<int> B{1, 3, 4, 5};
+	v.swap(B);
+
+	// 清空元素
+	v.clear();
+	//判断是否为空
+	if (v.empty())
+	{
+		cout << "vector为空" << endl;
+	}
+	// 通过释放未使用的内存较少空间
+	v.shrink_to_fit();
+	return 0;
+}
+```
+
+# `set`系列
+
+> 特点
+>
+> * `默`认`升序`排序(`可降序`)
+> * 内部使用`红黑树`
+> * `不含`重复元素(自动`去重`)
+
+```cpp
+#include <iostream>
+#include <set>
+using namespace std;
+
+int main(void)
+{
+	//1,创建set
+	set<int> st; //默认升序相当于set<int,less<int> > s;
+	//set<int, greater<int>> st; //设置降序
+	//2,插入数据 并自动递增排序且去重
+	st.insert(3);
+	st.insert(2);
+	st.insert(5);
+	st.insert(1);
+	st.insert(6);
+	st.insert(7);
+	st.insert(9);
+	st.insert(71);
+	st.insert(17);
+	st.insert(55);
+	st.insert(5); //重复的元素将会被省略
+
+	//3，查找元素 find,返回set对应值为value的迭代器
+	set<int>::iterator it = st.find(3);
+	cout << "返回查询的值: " << *it << endl;
+	//4,删除元素
+	//使用erase可以删除单个元素，也可以删除一个区间内的所有数据
+	st.erase(7); //删除7元素
+	it = st.find(6);
+	st.erase(it, st.end()); //删除6之后的所有元素
+
+	//5,返回元素个数O(1)
+	cout << "元素个数为:" << st.size() << endl;
+
+	//6，输出
+	for (it = st.begin(); it != st.end(); it++)
+	{
+		cout << *it << endl;
+	}
+	// 7 清空所有元素O(N)
+	st.clear();
+	//  8 返回set是否是空
+	if (st.empty())
+	{
+		cout << "空" << endl;
+	}
+	return 0;
+}
+```
+
+> * `unordered_set `： 使用``散列``取代`红黑树`，实现`只去重不排序`。速度`快于set`
+> * `multise`t : `不去重`，但`排序`
+> * `unordered_multiset` : `不排序`，`不去重`
+
+# map
+
+> map存储的pair对象，也就是用pair类模版创建的键值对。
+>
+> 默认根据`键`来进行升序排序。并`去重`
+>
+> `map`存储的都是`pair类型`的`键值对`元素
+
+```cpp
+#include <iostream>
+#include <map>
+#include <algorithm>
+#include <string>
+using namespace std;
+//输出map
+auto print = [](auto const comment, auto const& map)
+{
+	cout << comment << "{";
+	for (const auto& pair : map)
+	{
+		//first键，second对应的值，map默认根据键进行升序排序
+		cout << "{" << pair.first << ":" << pair.second << "}";
+	}
+	cout << endl;
+};
+int main(void)
+{
+	//默认为升序
+	// map<int, string,less<int>> m;
+	// map<int, string> m;
+	// 将升序设置为降序
+	map<int, string, greater<int>> m;
+	cout << m[10] << endl;
+	//添加
+	m[10] = "张三";
+	m[6] = "李四";
+	m[19] = "麻花";
+	m[3] = "王五";
+	m[3] = "王五";
+	print("键值对:",m);
+	// 插入键值对
+	m.insert(pair<int, string>(25, "刘强"));
+	m.insert(make_pair(29, "王宝强"));
+	//当键值对成功插入到对应的map容器中，其返回的迭代器指向该新插入的键值对，
+	//插入失败是，表明map容器中存在相同的键值对，此时返回的迭代器指向具有相同键的键值对，
+	// 同时bool变量的值为false
+	pair<map<int, string>::iterator, bool> ret;
+
+	ret = m.emplace(9, "清华"); 
+	cout << "1." << ret.first->first << " " << ret.first->second << ", " << ret.second << endl;
+	print("键值对:", m);
+
+	// 使用emplace_hint()
+	// 该方法不仅要创建键值对所需要的数据，
+	// 还需要传入一个迭代器作为参数,指明要插入的位置
+	// 新键值对会插入到该迭代器指向的键值对的前面
+	// 该方法的返回值是一个迭代器，不再是pair对象，
+	// 当成功插入新键值对时，返回迭代器指向新插入的键值对
+	// 反之若插入失败，则表明map容器中有相同键的键值对，
+	// 返回的迭代器就指向这个键值对
+	map<int, string>::iterator iters;
+	iters = m.emplace_hint(m.begin(), 15, "北大");
+	cout << iters->first << " : " << iters->second << endl;
+
+	// 删除同样使用key值
+	m.erase(10);
+	// 使用迭代器删除 ,使用查找，返回主键对应的迭代器
+	map<int, string>::iterator iter = m.find(6);
+	m.erase(iter);  
+	//同样可以使用迭代器的形式，删除某一个区间范围内的值
+	print("删除后:", m);
+
+	//查找
+	// lower_bound(key) 返回指向第一个键大于或等于key的键值对的迭代器
+	iter = m.lower_bound(30);
+	cout << "lower_bound: " <<iter->first << iter->second << endl;
+	// upper_bound(key) 返回的是指向第一个键大于key的键值对的迭代器
+	iter = m.upper_bound(5);
+	cout << "upper_bound: " << iter->first << iter->second << endl;
+	// 返回范围的键值对equal_range
+	// 创建一个pair对象，来接受equal_range()的返回值
+	pair<map<int, string>::iterator, map<int, string>::iterator> mypair;
+	mypair = m.equal_range(19);
+	for (auto iter = mypair.first; iter != mypair.second; iter++)
+	{
+		cout << iter->first << " " << iter->second << endl;
+	}
+	//返回当前容器可以容纳的最大元素个数
+	cout << "容器的最大存储量:(与机器有关)"<< m.max_size() << endl;
+	cout << "容器中键值对的个数:" << m.size() << endl;
+	cout << "元素个数: " << m.count(29) << endl; //map不允许重复值，为1
+	//清空map
+	m.clear();
+	//判断当前map容器是否为空
+	cout << m.empty() << endl;
+	return 0;
 }
 ```
 
