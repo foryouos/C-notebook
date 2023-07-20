@@ -11,7 +11,9 @@
 * `const_cast`：用于改变运算对象的`底层const属性`，`不能改`变其`顶层const属性`
 * `reinterpret_cast`: 用于`无关类型之间`的转换，如`整型和指针，不同类型的指针`等。
 
-# STL常见的容器
+# `STL`常见的容器
+
+![STL对比](https://mmbiz.qpic.cn/mmbiz_png/ORog4TEnkbucZCeIYhyYp7UQbMMwAwkjicmDYTickhqsdXd6NTgRN144dKic0kYCqWIRz74mSoR3aibclGfZxJoKUw/640?wx_fmt=png "STL对比")
 
 ## 顺序容器
 
@@ -59,21 +61,19 @@
 
 >* `map`是一个模板类，它的模版参数是键值对的类型和比较函数。比较函数用来定义键值对之间的大小关系，从而确认键值对在红黑树中的位置
 >* map的底层数据结构也是红黑树，它与set的红黑树相同，只是每个节点存储的不是单个元素，而是一个`pair对象`，包含一个`key`和一个`value`
->* map的插入操作是先在红黑树中找到合适的位置，然后创建一个新节点，并将其颜色设为红色。如果新节点的父节点也是红色，那么就需要进行旋转和变色操作来回复平衡
->* map的删除操作是先在红黑树中找到要删除的节点，然后其后继或前屈替换它，并释放原来的节点。如果被删除或替换的节点是黑色，那么就需要进行旋转和变色操作来回复平衡。
->* map的查找操作是沿着二叉搜索树的路径向下查找，直到直到目标键值对或者未空为止
+>* `map的插入`操作是先在红黑树中找到合适的位置，然后创建一个新节点，并将其颜色设为红色。如果新节点的父节点也是红色，那么就需要进行旋转和变色操作来回复平衡
+>* map的删除操作是`先`在红黑树中`找`到要`删除的节点`，然后`其后继或前屈`替换它，`并释放`原来的节点。`如果`被删除或替换的节点是`黑色`，那么就`需`要`进行旋转`和`变色操作`来`恢复平衡`。
+>* `map`的查找操作是`沿着二叉搜索树`的路径`向下查找`，直到直到目标键值对或者未空为止
 >
->由于红黑树保证了高度平衡，因此各操作的 时间复杂度均为`O(log n)`
+>由于红黑树保证了`高度平衡`，因此各操作的 时间复杂度均为`O(log n)`
 
 
 
 ## 简述map和unordered_map区别
 
-> map基于红黑树实现，该结构具有中排序功能，因此map内部的所有元素都是有序的，红黑树的每一个节点都代表着map的一个元素。因此，对于map进行的查找，删除，添加等一系列的操作都相当于是对红黑树进行这样的操作，红黑树的效率决定了map的效率，其增删改查时间复杂度O(log n)
+> map基于红黑树实现，该结构具有中排序功能，因此`map内部`的所有元素都是`有序`的，红黑树的每一个节点都代表着map的一个元素。因此，对于map进行的查找，删除，添加等一系列的操作都相当于是对红黑树进行这样的操作，`红黑树的效率`决定了`map的效率`，其`增删改查`时间复杂度`O(log n)`
 >
 > 而unordered_map内部实现了一个`hash表`，因此其元素的排列顺序是`杂乱的`，`无序的`。且增删改查时间复杂度为`O(1)`
-
-
 
 # 迭代器遍历容器
 
@@ -92,11 +92,8 @@
 #include <iostream>
 #include <vector>
 // write your code here......
-
 using namespace std;
-
 int main() {
-
     // write your code here......
     vector<int> list;
     int a;
@@ -121,7 +118,62 @@ int main() {
 }
 ```
 
+## 迭代器分类
 
+> 根据`输出`的`不同`，使用`不同`的`迭代器`。
+
+```cpp
+// 正向迭代器
+容器类名::iterator 迭代器名;  //依次向下遍历
+// 反向迭代器
+容器类名::reverse_iterator 迭代器名; //依次向上遍历
+// 常量正向迭代器
+容器类名::const_iterator 迭代器名;
+// 常量反向迭代器
+容器类名::const_reverse_iterator 迭代器名;
+```
+
+## 逆向迭代器
+
+> 当使用逆向迭代器时，注意`逆向迭代器`的位置，如果输出`其值`，需要` -1`
+>
+> ![逆向迭代器](https://mmbiz.qpic.cn/mmbiz_png/ORog4TEnkbucZCeIYhyYp7UQbMMwAwkjuLM5NrbEP8ZeAUavfb0xkb58SBOXHfmh6sUVRUgoW6ibmibMTAw15utg/640?wx_fmt=png "逆向迭代器")
+
+> 根据`输出`的`不同`，`选择`不同的`迭代器`
+
+```cpp
+/*
+给出一个包含n个整数的数组a,使用vector实现倒序输出数组的最后k个元素。
+*/
+#include <iostream>
+#include <vector>
+using namespace std;
+int main() {
+	int n, k;
+	vector<int>a;
+	// write your code here......
+	cin >> n >> k;
+	int vel;
+	for(int i = 0;i<n;i++)
+	{
+		cin >> vel;
+		a.emplace_back(vel);
+	}
+
+	// cout << a[0] << endl;
+	//使用逆向迭代器，一吃输出
+	for (vector<int>::reverse_iterator iter = a.rbegin(); iter != a.rend(); iter++)
+	{
+		cout << *iter << " ";
+		k--;
+		if (k == 0)
+		{
+			break;
+		}
+	}
+	return 0;
+}
+```
 
 # vector二维数组
 
@@ -138,170 +190,22 @@ int col = a[0].size(); //列数
 
 ```
 
-# 深拷贝和浅拷贝
-
-> * 浅拷贝就是将`源对象`的值`拷贝`给当前对象，两者指向的还是`同一地址`，对`一个`对象的`修改`可能会`影响`到`另一个`对象。
-
-```cpp
-class MyArray {
-public:
-    // 构造函数
-    MyArray(int size) {
-        this->size = size;
-        data = new int[size];
-    }
-    // 拷贝构造函数，实现浅拷贝
-    MyArray(const MyArray& other) {
-        size = other.size;
-        data = other.data; // 浅拷贝，将指针复制给新对象
-    }
-private:
-    int size;
-    int* data;
-};
-```
-
-> * 深拷贝是 一种`对象拷贝`，它会创建一个`新的对象`，并将原始对象中的`所有数据成员`复制到`新的对象`中，包括`多态分配内存`。原始对象和新的对象是`完全独立`的，对一个对象的修改`不会影`响另一个对象。
-
-```cpp
-#include <iostream>
-#include <cstring>
-#pragma warning(disable : 4996)
-using namespace std;
-class Person {
-    public:
-        char* name; // 姓名
-        int age;    // 年龄
-        Person(const char* name, int age) {
-            this->name = new char[strlen(name) + 1];
-            strcpy(this->name, name);
-            this->age = age;
-        }
-        // write your code here......
-        Person(const Person& p)//拷贝构造函数
-        {
-            this->name = new char[strlen(p.name) + 1];
-            strcpy(this->name, p.name);
-            this->age = p.age;
-        }
-        void showPerson() {
-            cout << name << " " << age << endl;
-        }
-        ~Person() {
-            if (name != nullptr) {
-                delete[] name;
-                name = nullptr;
-            }
-        }
-};
-
-int main() {
-    char name[100] = { 0 };
-    int age;
-    // 用户输入姓名和年龄
-    cin >> name;
-    cin >> age;
-    // 
-    Person p1(name, age);
-   	// 实现浅拷贝
-    Person p2 = p1;
-
-    p2.showPerson();
-
-    return 0;
-}
-```
-
->区别：
->
->* 对象中含有`指针类型`的成员变量时需要用`深拷贝构造`，`否`则用`浅拷贝构造`
->* 编译器`默`认的拷贝构造函数是`浅拷贝`构造函数
->* 如果对象中`含有指针`用了浅拷贝构造，那么会导致两`个指针变量`指向`同一块地址`空间，如果`没有创建内存`的操作就是`浅拷贝`，否则就是深拷贝
->* 深拷贝可以用于创建独立的副本，对于需要完全独立的对象的情况，必须在修改副本时不影响原始对象的状态。而浅拷贝通常用于创建共享对象，当需要多个共享相同的数据时，可以使用浅拷贝来减少内存占用和提高性能。
-
-# 友元函数
-
-> `友元函数`只是一个普通函数，并不是该类的类成员函数，它可以在`任何地方调用`，友元函数中通过`对象名`来`访问`该类的`私有或保护成员`。
-
-```cpp
-friend <类型> <友元函数名>(<参数表>);
-#include <iostream>
-using namespace std; 
-class A
-{
-public:
-    A(int _a):a(_a){};
-    friend int geta(A &ca);  //  < 友元函数
-private:
-    int a;
-};
- 
-int geta(A &ca) 
-{
-    return ca.a;
-}
- 
-int main()
-{
-    A a(3);    
-    cout<<geta(a)<<endl;
- 
-    return 0;
-}
-```
-
-# 友元类
-
-> ```cpp
-> friend class <友元类名>
-> ```
->
-> 类B是类A的友元，那么类B可以直接访问A的私有成员
->
-> * 友元关系没有继承性
-> * 友元关系没有传递性
-
-```cpp
-#include <iostream>
-using namespace std;
-class A
-{
-public:
-    A(int _a):a(_a){};
-    friend class B;
-private:
-    int a;
-};
-class B
-{
-public:
-    int getb(A ca) {
-        return  ca.a; 
-    };
-};
-int main() 
-{
-    A a(3);
-    B b;
-    cout<<b.getb(a)<<endl;
-    return 0;
-}
-```
-
 # 数组系列
 
-> cbegin在begin迭代器的基础上，添加了const属性，不能用于修改元素。
+> 支持`下标访问`
 
->* vector动态可变
->* 可存储任何类型数据
->* 连续存储空间(扩容和中间插入效率低)
->* 大小动态改变，会被容器自动处理
+> `cbegin`在`begin`迭代器的`基础上`，`添加`了`const属性`，`不能`用于`修改`元素。
+
+>* `vector`动态`可变`
+>* 可`存储任何类型`数据
+>* `连续存储空间`(扩容和中间插入效率低)
+>* 大小`动态改`变，会被容器自动处理
 >
->> array区别：
+>> 与`array`区别：
 >>
->> * array 固定大小，不能调整大小
+>> * array `固定`大小，不能调整大小
 >> * array编译时就已经分配好内存
->> * array适合存储大小已知并且大小不会改变的数据。
+>> * array适合存储大小已知并且`大小不会改变`的数据。
 
 ## 插入语法
 
@@ -321,18 +225,16 @@ iterator insert(pos,initilist);
 ## emplace_back和push_back区别
 
 * `push_back()` 向容器尾部添加元素时
-  * 创建元素
-  * 拷贝/移动到容器中
-  * 事后销毁第一步创建的元素
+  * `创建`元素
+  * `拷贝/移动`到容器中
+  * 事后`销毁第一步`创建的元素
 * `emplace_back()`
-  * 直接在容器尾部创建元素
-  * 省去拷贝和移动的过程，在使用中`效率更高`
+  * `直接`在`容器尾部`创建元素
+  * `省`去`拷贝和移动`的过程，在使用中`效率更高`
 
 > * `c.emplace_back(t)` : 在`c`的`尾部`创建一个`值为t`的元素
 > * `c.emplace_front(t)` : 在`t的头部`创建一个值为`t`的元素
 > * `c.emplace(p,t)`  : 在`迭代器p`所指向的`元素之前`创建一个`值为t`的元素，`返回`指定`新添加元素`的`迭代器`。
-
-
 
 ## 使用
 
@@ -391,7 +293,6 @@ int main(void)
 	print_container(v);
 	//3.4移除末尾元素
 	v.pop_back();
-
 	// 4,查考容量 遍历查找
 	//  顺序遍历，逆序遍历
 	for (const auto& el : v)
@@ -429,6 +330,66 @@ int main(void)
 }
 ```
 
+# 双端队列`deque`
+
+> * 可以进行`下标访问`的`顺序容器`
+> * 允许在它的`首尾`两端`快速`插入及删除
+> * 与`vector相反`，`不`一定`相邻存储`。
+> * 时间复杂度 :  `随`机访问 `O(1)`，在`结尾`或`起始`插入或移除元素 -- 常数`O(1)`，`插`入或`移除`元素 --线性 `O(n)`
+> * 
+
+```cpp
+/*
+请设计一个排队程序，用户有普通客人和 VIP 客人之分，VIP 客人不排队（即 VIP 客人在队列头部），请将已有的guest1和guest2放入队列中（guest1排在guest2前），并将VIP客人新增至队列头部。
+*/
+
+#include <iostream>
+#include <deque>
+using namespace std;
+
+class Guest {
+public:
+    string name;
+    bool vip;
+    Guest(string name, bool vip) {
+        this->name = name;
+        this->vip = vip;
+    }
+};
+void in_queue(deque<Guest>& deque,Guest guest) // 引用地址才能改变deque
+{
+    if(guest.vip)
+    {
+        //vip插入队列头部
+        deque.emplace_front(guest);
+    }
+    else
+    {
+        //普通用户
+        //普通客户插入到队列尾部
+        deque.emplace_back(guest);
+    }
+}
+int main() {
+
+    Guest guest1("张三", false);
+    Guest guest2("李四", false);
+    Guest vipGuest("王五", true);
+    deque<Guest> deque; // 双端队列队列
+
+    // write your code here......
+    in_queue(deque,guest1);
+    in_queue(deque,guest2);
+    in_queue(deque,vipGuest);
+    //除数队列排序
+    for (Guest g : deque) {
+        cout << g.name << " ";
+    }
+
+    return 0;
+}
+```
+
 # `set`系列
 
 > 特点
@@ -436,12 +397,12 @@ int main(void)
 > * `默`认`升序`排序(`可降序`)
 > * 内部使用`红黑树`
 > * `不含`重复元素(自动`去重`)
+> * 不能下标访问。
 
 ```cpp
 #include <iostream>
 #include <set>
 using namespace std;
-
 int main(void)
 {
 	//1,创建set
@@ -499,6 +460,8 @@ int main(void)
 > 默认根据`键`来进行升序排序。并`去重`
 >
 > `map`存储的都是`pair类型`的`键值对`元素
+>
+> `支`持`下标`访问
 
 ```cpp
 #include <iostream>
@@ -591,3 +554,293 @@ int main(void)
 }
 ```
 
+# list
+
+> 双向带头循环链表 
+>
+> * 允许在`常数范围内`的`任意位置`进行`插入和删除`  --`不支持随机下标`访问
+> * `链表`是插入元素，`不需要`提前`扩容`，`没有reserve操作`，`可`以使用`empty`判空，使用size返回大小
+> * 由于其双向迭代器的特征，list只能使用list提供的sort排序即：`list.sort()`.`链表`排序`效率较低`，`排序`尽量`使用vector`不要使用list
+>
+> ![list](https://mmbiz.qpic.cn/mmbiz_png/ORog4TEnkbucZCeIYhyYp7UQbMMwAwkjQ3rusOhCrSr81CEicyRfw6rNGhaicylJRmSOzcr7rohBowk9XGyeOobw/640?wx_fmt=png)
+
+##  forward_list
+
+> 支持从`容器`中的`任何位置`快速`插入和移除`元素的容器，`不`支持`快速随机`访问，实现方式为`单链表`。与list相比，此容器不需要双向迭代时提供`更有效地利用空间`的存储。
+
+```cpp
+#include <iostream>
+#include <list>
+#include <algorithm>
+#include <string>
+using namespace std;
+void print(list<int> l)
+{
+	cout << " l = { ";
+	for (int n : l)
+	{
+		cout << n << ", ";
+	}
+	cout << "};" << endl;
+}
+int main(void)
+{
+	//双向循环列表初始化
+	list<int> l = {7,5,16,8};
+	
+	// 添加元素
+	// 添加元素到list开头
+	l.push_front(25);
+	// 添加元素到list结尾
+	l.push_back(13);
+	// 数据插入
+	// 查找插入位置之前的迭代器
+	auto it = find(l.begin(), l.end(), 16); //返回16前一位的迭代器
+	// 插入数据
+	if (it != l.end())
+	{
+		l.insert(it, 42);
+	}
+	// 遍历打印list的值
+	print(l);
+	// 只能使用list提供的方法进行排序
+	l.sort();
+	print(l);
+	// 将元素逆置
+	l.reverse();
+	print(l);
+	// 交换两个容器的内容
+	list<int> li = { 1,2,3,4,5 };
+	l.swap(li);
+	print(l);
+	print(li);
+	//重新分配内容
+	// assign函数用于将新内容分配给容器，替换其当前的内容
+	// 1,将n个值为val的数据分配给容器
+	// 2,将所给迭代器区间当中的内容分配给容器
+	l.assign(li.begin(), li.end());
+	print(l);
+	// 移除元素
+	l.remove(1); // 移除所有等于1的元素
+	l.remove_if([](int n) { return n > 25; }); //移除全部大于10的元素
+	print(l);
+	// 使用erase移除
+	// 1,要移除元素的迭代器
+	// 要移除的元素迭代器范围
+	l.erase(l.begin());
+	return 0;
+}
+```
+
+# stack
+
+>   ` FILO`（`先进后出`）`数据结构`
+
+```cpp
+#include <iostream>
+#include <stack>
+#include <algorithm>
+#include <string>
+using namespace std;
+int main(void)
+{
+	// 初始化先进后出
+	stack<int> s;
+	// 插入元素
+	s.emplace(1); //先栈顶插入元素
+	for (int i = 0; i < 9; i++)
+	{
+		s.emplace(i);
+	}
+	s.push(2);    //上同
+	s.pop();      // 删除栈顶元素
+	cout << s.size() << endl; //返回栈的大小
+	//访问栈顶元素
+	cout << s.top() << endl;
+
+	return 0;
+}
+```
+
+# queue
+
+> 队列 ： `先进先出`的`数据结构`.
+>
+> queue在底层容器`尾端推入`元素，在`首端弹出`元素。
+
+```cpp
+#include <iostream>
+#include <queue>
+#include <algorithm>
+using namespace std;
+int main(void)
+{
+	queue<int> q;
+	//1，在尾部构造元素
+	q.push(9);
+	for (int i = 0; i < 6; i++)
+	{
+		q.emplace(i);
+	}
+	//2,访第一个元素 //队头
+	cout << q.front() <<endl;
+	//3，访问最后一个元素 // 队尾
+	cout << q.back() << endl;
+
+	// 4,删除首个元素
+	cout << q.size() << endl; //返回当前元素
+	q.pop(); //删除了0
+	// 5,判断当前容器是否为空
+	
+	// 交换内容
+	queue<int> qu;
+	q.swap(qu); //q和空的qu队列交换
+	if (q.empty())
+	{
+		cout << "空" << endl;
+	}
+	return 0;
+
+}
+```
+
+# 联系
+
+## 统计字符串中各字母字符对应的个数
+
+> 键盘输入一个字符串，统计字符串中各个字母字符的个数。例如：键盘输入"Hello World!"，上述字符串中各个字母字符的出现的次数为：
+>
+> H:1
+>
+> e:1
+> l:3
+> o:2
+> W:1
+> r:1
+>
+> d:1
+>
+> 要求使用map实现，键的排序使用map默认排序即可。
+
+```cpp
+#include <cctype>
+#include <cstring>
+#include <iostream>
+#include <map>
+// write your code here......
+using namespace std;
+int main() {
+
+    char str[100] = { 0 };
+    cin.getline(str, sizeof(str));
+
+    // write your code here......
+    //输入字符串，根据字符依次加入map，主键是char,值为个数
+    map<char, int> m;
+    // 遍历一个字符串
+    for (int i = 0; i < strlen(str); i++) {
+        // if (isalpha(str[i])) {
+        //     if ( m.count(str[i])) { //是字符并且存在
+        //           m[str[i]] = m[str[i]]+1;//若没有查到返回
+        //         //判断对应的字符是否存在，重复会被替换
+        //     } else {
+        //         m[str[i]] = 1;
+        //     }
+        // }
+        if (isalpha(str[i])) 
+        {
+            m[str[i]] ++; //若没有查找，会插入，找到之后将对应的值++
+        }
+        
+    }
+    // 输出
+    for (const auto& pair : m) {
+        cout << pair.first << ":" << pair.second << endl;
+    }
+
+    return 0;
+}
+```
+
+## 查找
+
+> 给出一个大小为*n*的数组*a*，有m*次询问，每次询问给出一个x*，你需要输出数组a*中大于x*的最小值，如果不存在，输出-1。
+>
+> 要求使用set实现。
+
+```cpp
+#include<bits/stdc++.h>
+#include <set>
+using namespace std;
+int main(){
+	int n,m; //set数组大小为n,m
+	cin>>n>>m;
+	set<int>s;
+	int q;
+	int i;
+	for(i = 0;i<n;i++)
+	{
+		cin>>q;
+		s.insert(q);
+	}
+	//所有数据已经插入到集合中
+	//进行m次询问
+	for(i=0;i<m;i++)
+	{
+		cin>>q;
+		//输出大于x的最小值 upper_bound 返回指向首个大于给定键的元素的迭代器
+		set<int>::iterator it = s.upper_bound(q); 
+		// 如果不存在，返回end迭代器，end是空读取不到的
+		if(it == s.end())
+		{
+			cout<<-1<<endl;
+		}
+		else {
+			cout<<*it<<endl;
+		}
+		
+	}
+	return 0;
+}
+```
+
+## 对vector排序
+
+> 键盘输入 5 个整数，使用 vector 进行存储，使用 STL 排序算法对元素进行排序（从大到小），再使用 STL 遍历算法输出元素。（元素和元素之间使用空格隔开）
+
+```cpp
+#include <algorithm>
+#include <functional>
+#include <iostream>
+#include <vector>
+// write your code here......
+
+using namespace std;
+
+int main() {
+
+    int num;
+    vector<int> v;
+    for (int i = 0; i < 5; i++) {
+        cin >> num;
+        v.push_back(num);
+    }
+
+    // write your code here......
+    //默认是升序，使用greater<int>()调整为降序
+    sort(v.begin(), v.end(),greater<int>());
+    for(const auto &e:v)
+    {
+        cout<<e<< " ";
+    }
+    cout<<endl;
+    return 0;
+}
+```
+
+# 资料
+
+> 公众号：瓶子的跋涉  
+>
+> * 在对话框输入`STL`
+> * 即可获得`STL范例大全`，看看学习，用法。
