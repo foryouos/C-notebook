@@ -15,7 +15,7 @@
 
 > * 平台管理(`platform managemet)` : 平台管理表示一系列的`监视`和`控制`功能，`操作的对象`是`系统硬件`，比如监视系统的`温度`，`电压`，`风扇`，`电源`等，并`做响应的`调节工作，以保证系统处于`健康状态`。若系统`不正常`，通过`复位方式`重启
 >
-> ![平台管理](https://img-blog.csdnimg.cn/20200510114843136.png)
+> ![平台管理](https://mmbiz.qpic.cn/mmbiz_png/ORog4TEnkbsMGpxMLgwLn51xNGAJSW4OMUhm6pnFLFAPjsvVVm3UKhoDSdAID9LRzP3lntShJrRflt8mP4FkmQ/640?wx_fmt=png)
 >
 > * `BMC` : `Baseboard Management Controller)`： 把上面的功能集成到一个`控制器`上，称为`基板管理控制器`，`BMC`是一个独立的系统，它不依赖系统上的`其它硬件`(如`CPU`,`内存`)，也不依赖于`BIOS`,`OS`等，但`BMC`可以与`BIOS`和`OS`交互。BMC本身也是一个`带外处理器`(一般都是ARM处理器)的小系统，单独用来处理某些工作，其中重点还是平台管理
 >
@@ -26,7 +26,7 @@
 
 > `IPMI`全称`Intelligent Platform Management Interface` 智能平台`管理接口`，`IPM`是对`平台管理`概念的`具体规范`，该规范定义了`平台管理`的软硬件架构，`交互指令`，`事件格式`，`数据记录`，`能力集`等，而`BMC`是`IPMI`中的一个`核心`部分，属于`IPMI`硬件架构。
 
-![IPMI智能平台管理接口](https://img-blog.csdnimg.cn/20200510131422340.png)
+![IPMI智能平台管理接口](https://mmbiz.qpic.cn/mmbiz_png/ORog4TEnkbsMGpxMLgwLn51xNGAJSW4OsVpI6yqBYMPjtGBDqeib1icQ3VLf070vrib6YSor4RgZ9vldlLDQAQUCA/640?wx_fmt=png)
 
 ## BIOS通信
 
@@ -40,7 +40,7 @@
 
 * 确认`BIOS`是否发送了`IPMI命令`给`BMC`,可以查看`BMC`返回的`completion code`;
 * 确认`BMC`是否收到了`BIOS`发送的`IPMI命令`
-* 如果`BIOS`发送了`IPMI命令`，但是`BMC未接收`：可能是`BMC`的`IPMI进程`正处于`忙碌状态`，所以`丢掉`了这条`IPMI命`令(BIOS如果发送失败，可以`尝试多次`发送；另外可以`稍微调高KCS通道`的`延时`)；当然，也有可能是BMC的IPMI进程挂了
+* 如果`BIOS`发送了`IPMI命令`，但是`BMC未接收`：可能是`BMC`的`IPMI进程`正处于`忙碌状态`，所以`丢掉`了这条`IPMI命`令(BIOS如果发送失败，可以`尝试多次`发送；另外可以`稍微调高KCS通道`的`延时`)；当然，也有可能是BMC的`IPMI进程`挂了
 * （极少见) `一条IPMI`命令通常设计`2个底层`实现函数，`SendDataToBmcPort()`和`ReceiveBmcDataFormPort()`。接收时，BIOS从`KCS`的`I/O端口`读取`数据`，读完后，会`检测KCS寄存器`中`OBF状态寄存器`，如果`BMC没有写`数据，就会`计数-1`，`延时5ms`，然后重试，当`BMC`一直不写数据时，`计数到0`,就认为`BMC有故障`，返回`Device Error`;
 
 # `ACPI`
@@ -104,11 +104,11 @@
 
 > `UEFI`提供给操作系统的`接口`，包括`启动服务`(`Boot Services` ,` BS`)
 
-* `事件`服务：事件时`异步`操作的基础，有了事件的支持，才能够在UEFI系统内执行并发操作
+* `事件`服务：事件时`异步`操作的基础，有了`事件`的支持，才能够在`UEFI系统内`执行`并发操作`
 * `内存`管理：提供内存的分配与释放，管理系统内存映射
-* `Protocol`管理：提供了安装与卸载Protocol的服务，注册通知函数的服务
-* `Protocol使用类`服务: `Protocol`的打开与关闭，查找支持Protocol控制，例打开设备上`PciloProtocol`,用`PciIo->Io.Read()`服务读取设备上的`寄存器`
-* `驱动管理`：包括用于将驱动安装到控制器的`connect服务`，以及将驱动从控制器上`卸载的disconnect服务`。若启动时，需要网络服务，通过loadImage将驱动加载到内存，通过connect服务将驱动安装到设备
+* `Protocol`管理：提供了`安装与卸载`Protocol的服务，注册通知函数的服务
+* `Protocol使用类`服务: `Protocol`的打开与关闭，查找支持`Protocol控制`，例打开设备上`PciloProtocol`,用`PciIo->Io.Read()`服务读取设备上的`寄存器`
+* `驱动管理`：包括用于将驱动安装到控制器的`connect服务`，以及将驱动从控制器上`卸载的disconnect服务`。若启动时，需要网络服务，通过loadImage将驱动加载到内存，通过`connect`服务将驱动安装到设备
 * `Image管理`：加载，卸载，启动和退出UEFI应用程序或驱动
 * `ExitBootServices`：用于结束启动服务
 
@@ -142,9 +142,9 @@
 > UefiCpuPkg/ResetVector/Vtf0
 > ```
 >
-> 
 
 ### SEC阶段任务
+
 > * 接受并处理系统`启动`和`重启`信号，以及运行过程中的`严重异常`信号
 > * `初始`化`临时存储区域` ，启动系统需要的一些临时`RAM`，空间资源仍然`稀缺`
 > * 作为`可信系统`根传递给下一个`阶段PEI`
@@ -178,11 +178,11 @@
 
 ### PEI执行流程
 
-![image-20230728112703251](https://mmbiz.qpic.cn/mmbiz_png/ORog4TEnkbuvDicPdvq9q8kCkj2w7H9wbyfRUncfdRmpjMhWN2xoDBRjph0zgcRTwZm2NtlmfiakNWYBjF5YlzibA/640?wx_fmt=png)
+![FEI执行流程](https://mmbiz.qpic.cn/mmbiz_png/ORog4TEnkbuvDicPdvq9q8kCkj2w7H9wbyfRUncfdRmpjMhWN2xoDBRjph0zgcRTwZm2NtlmfiakNWYBjF5YlzibA/640?wx_fmt=png)
 
 > 在`PEI`阶段，`PEIM`，`PPI`，`HOM`组成了PEI阶段，PEI阶段的`module`可理解为`Driver`就是`PEIM`，`PEI阶段`就是由一个一个的PEIM组成的；`PPI`是`PEIM`之间相互调用的接口，由唯一的`GUID`(`全局统一标识符`)引导，内部也包含一些`接口`，HOB相当于信件在PEI阶段创建，会记录当前系统的信息，可以`自定义HOB`，然后在`DXE阶段读出`
 
-![PEI阶段](https://img-blog.csdnimg.cn/670bb844aa004542bbfdc98dbc60ec6a.png)
+![PEI阶段](https://mmbiz.qpic.cn/mmbiz_png/ORog4TEnkbsMGpxMLgwLn51xNGAJSW4O6DbPW269kH3ia2YDqGZRGehM7A0vjrHkd2DNkOOYfKH3jtdQGsD4znQ/640?wx_fmt=png)
 
 > `PEIM` :` PEI Module`，会被编译成`efi binary`
 >
@@ -194,7 +194,7 @@
 > * `PPIs`结构体，PPI就是一个结构体，可能包含的功能，数据。
 > * PEIM会把PPI注册到`PEI Foundation`。  （`PEI Foundation`管理着庞大的`PPI`数据库)
 
-* `Cire Services`包含后面phase用到的各种Services。在PEI阶段get当前计算机启动的boot Mode有直接定义毫的PEI Service函书，在DXE以及后面的阶段要通过HOB方式通过`get HOB LIS`T然后拆解信息进行`ge`启动`boot Mode`
+* `Core Services`包含后面phase用到的各种Services。在PEI阶段get当前计算机启动的boot Mode有直接定义的PEI Service函数，在DXE以及后面的阶段要通过HOB方式通过`get HOB LIS`T然后拆解信息进行`ge`启动`boot Mode`
 * `Core Dispatcher`负责派发个`PEIMs`,将`PEIM`按照既定的顺序`Load`并执行，`Dependency`顺序，就是`inf`文件里面的`depx`, 满足条件可执行
 * 各`PEIM Entry`可能使用其它`PEIM`和`PPI`
 * `PEI Core`最后会找到`DXE`获得之前`phase Data`是从HOB里拿到，PEI Core会创建HOB,PEI和DXE都可以使用`HOB的Data`
@@ -233,31 +233,28 @@ PeiInstallPpi (
 
 ### HOB
 
-> HOB(`Hand-Off Blocks`)：传输信息的载体，PEI和DXE联系薄弱，DXE需要知到PEI初始化的硬件内存等数据，HOB作为桥梁。
+> HOB(`Hand-Off Blocks`)：传输信息的载体，`PEI`和`DXE`联系薄弱，`DXE`需要知到`PEI初始化`的硬件内存等数据，`HOB`作为`桥梁`。
 >
 > `HOB`实际就是一个`链表`，当我们找到hoblist的头，那么整个链表的数据都能得到，`GetHobList()`获取`hoblist`的`指针`，
 >
 > * 第`一个HOB`总是`PHIT==Phase Handoff GetHobList(),`里面是`boot mode`
 > * 其它`HOB`可能出现在`List任意位置`，最重要的是`System Memory HOB & Firmware Volumes`，`HOB`列表总是会以`END_OF_HOB_LIST`结束
 
-![HOB链表](https://img-blog.csdnimg.cn/a4c840de61d243c8ae52613688bda033.png)
+![HOB链表](https://mmbiz.qpic.cn/mmbiz_png/ORog4TEnkbsMGpxMLgwLn51xNGAJSW4OX9O112gUia4BDVaFKNabwXA6egBbhLw68IpEicgdB2zIvhBEMibMfTDKQ/640?wx_fmt=png)
 
 #### 添加新的HOB
 
 ```c
 /**
   Add a new HOB to the HOB List.
-
   @param PeiServices        An indirect pointer to the EFI_PEI_SERVICES table published by the PEI Foundation.
   @param Type               Type of the new HOB.
   @param Length             Length of the new HOB to allocate.
   @param Hob                Pointer to the new HOB.
-
   @return  EFI_SUCCESS           Success to create HOB.
   @retval  EFI_INVALID_PARAMETER if Hob is NULL
   @retval  EFI_NOT_AVAILABLE_YET if HobList is still not available.
   @retval  EFI_OUT_OF_RESOURCES  if there is no more memory to grow the Hoblist.
-
 **/
 EFI_STATUS
 EFIAPI
@@ -290,7 +287,7 @@ typedef EFI_STATUS(EFIAPI *EFI_IMAGE_ENTRY_POINT)
 )
 ```
 
-> 驱动之间通过`Protocol`进行通信。
+> `驱动`之间通过`Protocol`进行通信。
 >
 > * `Protocol`特殊结构体保存着对应的`GUID`，利用系统`BootServices`的`OpenProtocol`，并根据`GUID`打开对应的`Protocol`，进而使用`对应的服务`。当所有的`driver`执行`完毕`，系统`完成初始化`，
 
@@ -300,14 +297,15 @@ typedef EFI_STATUS(EFIAPI *EFI_IMAGE_ENTRY_POINT)
 >
 > * 创建`EFI System Table`在随后的`DXE Drive`r中逐步完善table
 > * 生成`Boot Services / Run Time Services / DXE Services`
-> * 调用`Dispatcher`，所有的DXE Driver在这个函数中被检测并执行
+> * 调用`Dispatcher`，所有的`DXE Driver`在这个函数中`被检测`并`执行`
 > * `Driver`执行完毕之后，执行特殊的`DXE Driver`进而进入BDS阶段
 
 ## DXE Dispatcher
+
 > * 去`BIOS`芯片中搜寻`DXE Driver`
 > *  检测并按照相应的顺序执行所有的`DXE Driver`,在每个`driver`的`inf`文件的`driver`依赖条件都成立时，该driver才被执行
 
-![DXE Dispatcher](https://img-blog.csdnimg.cn/20210520145140677.png)
+![DXE Dispatcher](https://mmbiz.qpic.cn/mmbiz_png/ORog4TEnkbsMGpxMLgwLn51xNGAJSW4OR3tzH7e6icgianicWicSRrI0JYlhlq7Z3vngbcHfm5Yk8OUrKo47c1pBug/640?wx_fmt=png)
 
 
 ## BDS阶段
@@ -321,7 +319,7 @@ typedef EFI_STATUS(EFIAPI *EFI_IMAGE_ENTRY_POINT)
 > * 初始化控制台设备:查看系统有`多少`加载必要的设备驱动：启动所有检测到的设备，加载`driver`
 > * 根据系统设置加载和执行启动项(若加载失败，系统将重新执行`DXE dispatcher`以加载更多的`驱动`，然后重新尝试加载`启动项`)
 
-![DXE执行流程](https://img-blog.csdnimg.cn/48969997637c402fbaa2c50dcf92f9a2.png)
+![DXE执行流程](https://mmbiz.qpic.cn/mmbiz_png/ORog4TEnkbsMGpxMLgwLn51xNGAJSW4OOvq9BXxGNrBA0viaNOtqVZzWeYVFibYXx1ibOg6DtH3Brx3L7ms99ZkwA/640?wx_fmt=png)
 
 ## BDS Steps
 
@@ -333,7 +331,7 @@ typedef EFI_STATUS(EFIAPI *EFI_IMAGE_ENTRY_POINT)
 * 执行`内存测试`
 * 进程`引导选项`
 
-![BDS Steps](https://img-blog.csdnimg.cn/86e9844f11dc4525b87d6aeca353d5ae.png)
+![BDS Steps](https://mmbiz.qpic.cn/mmbiz_png/ORog4TEnkbsMGpxMLgwLn51xNGAJSW4OicbYiaR9MNVKye0RgZibv9JhlT9slvgyn0dxCpMiavqXuIvpr3zd6HzYsg/640?wx_fmt=png)
 
 ## TSL阶段
 
@@ -349,7 +347,6 @@ typedef EFI_STATUS(EFIAPI *EFI_IMAGE_ENTRY_POINT)
 >
 > 由`常驻UEFI`驱动组成，计算机`关机`休眠`睡眠`重启过程中的系统信息都会在这一阶段`保存`。
 >
-> 
 
 # 源码部分基础
 
@@ -391,11 +388,11 @@ typedef signed char       INT8;
 ## PCI
 
 > * 局部总线：局部总线是在`ISA`和`CPU总线`之间添加`一级总`线或`管理层`。这样可将一些`高速外设如图形卡`，硬件控制器等从ISA总线上卸下而通过局部总线直接挂接在CPU总线上，使之余高速能与CPU总线相匹配。
-> * PCI  (Peripheral Component Interconnect) ：` Intel 1991`年推出的用于定义局部总线的标准。`PCI`不同于ISA总线，PCI数据地址总线于数据总线是分时复用。以方便可以节省接插件的管脚数，另一方便便于实现数据传输。
+> * PCI  (Peripheral Component Interconnect) ：` Intel 1991`年推出的用于定义`局部总线`的标准。`PCI`不同于ISA总线，PCI数据地址总线于数据总线是分时复用。以方便可以节省接插件的管脚数，另一方便便于实现数据传输。
 
 ## USB
 
-> `USB总线`提供`中低速率`外围设备的扩充能力，像键盘，鼠标，遥感，喇叭，麦克风等设备，只要是USB接口设计，就可以以`热拔插`（Hot Plug)的方式，直接跟计算机连接或拆除(离线)，计算机与`OS会自动检测`并启用/禁用该设备，达到真正的即插即用。
+> `USB总线`提供`中低速率`外围设备的扩充能力，像键盘，鼠标，遥感，喇叭，麦克风等设备，只要是USB接口设计，就可以以`热拔插`（`Hot Plug`)的方式，直接跟计算机连接或拆除(离线)，计算机与`OS会自动检测`并启用/禁用该设备，达到真正的即插即用。
 >
 > 新近的`BIOS`直接提供了`USB设备驱动`与`读写`功能，比如开始就可以使用`USB键盘`，`鼠标`以及`USB软盘`，硬盘甚至`USB CD-ROM`来开机。
 
@@ -403,17 +400,17 @@ typedef signed char       INT8;
 
 > 高级配置和电源管理接口：`Advance Configuration and Power Management Interface` .早先ACPI将电源管理几乎全部分配给了`BIOS控制`，限制了`操作系统`在控制电脑。系统可能进入`极地功耗`消耗状态，这些就是可利用多数桌面型电脑上睡眠和休眠设置
 >
-> 节点方式：
+> 节电方式：
 >
 > * 显示屏`自动断电`
 > * 系统把当前信息存储在`内存`中，只有内存等几个关键部件通电，即挂起到内存
-> * 挂起到硬盘，计算机自动关机，关机千将当前数据存储在硬盘上。
+> * `挂起到硬盘`，计算机自`动关机`，关机千将当前数据存储在硬盘上。
 
 ## 中断向量表
 
 > `中断向量表`在`内存`中保存，其中放着`256个中断源`所对应的中断处理程序入口
 
-![什么是中断向量表](https://i0.hdslb.com/bfs/article/75ac548ac5423238aed9cc55ba33c4d7dfca13db.png@1256w_1292h_!web-article-pic.avif)
+![什么是中断向量表](https://mmbiz.qpic.cn/mmbiz_jpg/ORog4TEnkbsMGpxMLgwLn51xNGAJSW4OcHYjxhm261gnSf5DY7mFGicKpHo98xz2CCLpz7ds97moEWjrCzpsIZQ/640?wx_fmt=webp)
 
 ## 英语
 

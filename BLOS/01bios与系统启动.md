@@ -193,4 +193,3 @@
   * 获得BIOS中英文对照：公众号回复：`BIOS英文` 即可获得
   * 下载:https://foryouos.lanzoul.com/iApcp138b9be 密码:5213
 
-
