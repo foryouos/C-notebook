@@ -32,7 +32,7 @@ npm install shokax-cli --location=global
 
 * 安装shokaX主题(建议安装npm主题，因为设计更多的自定义部分)
 
-> 使用SXC主题目录会存到node_modules当中，使用GitHub的安装，主题文件会存到themes当中
+> 使用SXC主题目录会存到`node_modules`当中，使用`GitHub的安装`，主题文件会存到`themes`当中
 
 ```sh
 SXC install -r=github shokaX
@@ -54,4 +54,6 @@ npm i hexo-feed
 # SEO需要的
 
 ```
+
+
 
