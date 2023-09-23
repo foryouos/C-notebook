@@ -27,7 +27,7 @@ npm  install -g npm-check-updates
 
 
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/8e4c94d5-4596-4170-a3a0-fb348e946b8e/deploy-status)](https://app.netlify.com/sites/foryouos/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8e4c94d5-4596-4170-a3a0-fb348e946b8e/deploy-status](https://app.netlify.com/sites/foryouos/deploys)
 
 
 
